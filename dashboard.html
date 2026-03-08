@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Dashboard | AgroVision</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.dashboard{
+padding:80px;
+text-align:center;
+}
+
+.tool{
+display:none;
+margin-top:40px;
+}
+
+select,input{
+padding:10px;
+margin-top:10px;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+background:#4caf50;
+border:none;
+color:white;
+cursor:pointer;
+border-radius:5px;
+}
+
+.preview{
+margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<h2>🌱 AgroVision</h2>
+</div>
+
+<nav>
+<a href="home.html">Home</a>
+<a href="index.html?logout=true">Logout</a></nav>
+
+</header>
+
+
+<section class="dashboard">
+
+<h1>AgroVision Dashboard</h1>
+<p id="selectMessage" style="color:red;font-weight:bold;"></p>
+
+<!-- Crop Disease Detection -->
+
+<div id="disease" class="tool">
+
+<h2>Crop Disease Detection</h2>
+
+<p>Select crop and upload leaf image for analysis</p>
+
+<select id="cropDisease">
+<option value="">Select Crop</option>
+<option value="rice">Rice</option>
+<option value="tomato">Tomato</option>
+<option value="potato">Potato</option>
+<option value="cotton">Cotton</option>
+</select>
+
+<br><br>
+
+<input type="file" id="leafImage" accept="image/*" onchange="previewImage()">
+
+<div class="preview">
+<img id="imagePreview" width="200">
+</div>
+
+<br>
+
+<button onclick="analyzeDisease()">Analyze Disease</button>
+
+<p id="diseaseResult"></p>
+
+</div>
+
+
+
+<!-- Fertilizer -->
+
+<div id="fertilizer" class="tool">
+
+<h2>Fertilizer Recommendation</h2>
+
+<p>Select crop to see recommended fertilizer.</p>
+
+<select id="cropFertilizer">
+<option value="">Select Crop</option>
+<option value="rice">Rice</option>
+<option value="wheat">Wheat</option>
+<option value="maize">Maize</option>
+<option value="tomato">Tomato</option>
+</select>
+
+<br><br>
+
+<button onclick="showFertilizer()">Get Recommendation</button>
+
+<p id="fertilizerResult"></p>
+
+</div>
+
+
+
+<!-- Market -->
+
+<div id="market" class="tool">
+
+<h2>Market Price Prediction</h2>
+
+<p>Select crop to see example price prediction.</p>
+
+<select id="cropMarket">
+<option value="">Select Crop</option>
+<option value="rice">Rice</option>
+<option value="wheat">Wheat</option>
+<option value="tomato">Tomato</option>
+<option value="potato">Potato</option>
+</select>
+
+<br><br>
+
+<button onclick="showMarket()">Predict Price</button>
+
+<p id="marketResult"></p>
+
+</div>
+
+
+
+<!-- Weather -->
+
+<div id="weather" class="tool">
+
+<h2>Weather Advisory</h2>
+
+<p>Select location to see weather advice.</p>
+
+<select id="locationWeather">
+<option value="">Select Location</option>
+<option value="chennai">Chennai</option>
+<option value="coimbatore">Coimbatore</option>
+<option value="madurai">Madurai</option>
+<option value="salem">Salem</option>
+</select>
+
+<br><br>
+
+<button onclick="showWeather()">Check Weather</button>
+
+<p id="weatherResult"></p>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+/* Show selected tool */
+const params = new URLSearchParams(window.location.search);
+const tool = params.get("tool");
+
+if(tool){
+document.getElementById(tool).style.display="block";
+}
+else{
+document.getElementById("selectMessage").innerHTML =
+"⚠ Please go back to Home and click a Solution Box.";
+}
+
+
+/* Image preview */
+
+function previewImage(){
+
+const file = document.getElementById("leafImage").files[0];
+const preview = document.getElementById("imagePreview");
+
+if(file){
+preview.src = URL.createObjectURL(file);
+}
+
+}
+
+
+/* Disease Detection */
+function analyzeDisease(){
+
+let crop = document.getElementById("cropDisease").value;
+let file = document.getElementById("leafImage").files.length;
+let result = document.getElementById("diseaseResult");
+
+/* check if file uploaded */
+
+if(file === 0){
+result.innerHTML = "⚠ Please upload a leaf image before detecting disease.";
+return;
+}
+
+/* check if crop selected */
+
+if(crop === ""){
+result.innerHTML = "⚠ Please select a crop.";
+return;
+}
+
+/* disease result */
+
+if(crop=="rice"){
+result.innerHTML="Disease Detected: Leaf Blast <br> Recommendation: Apply Tricyclazole fungicide.";
+}
+
+else if(crop=="tomato"){
+result.innerHTML="Disease Detected: Early Blight <br> Recommendation: Spray Mancozeb and remove infected leaves.";
+}
+
+else if(crop=="potato"){
+result.innerHTML="Disease Detected: Late Blight <br> Recommendation: Use Copper fungicide.";
+}
+
+else if(crop=="cotton"){
+result.innerHTML="Disease Detected: Bacterial Blight <br> Recommendation: Spray Copper oxychloride.";
+}
+
+
+
+else{
+result.innerHTML="Please select crop and upload image.";
+}
+}
+
+
+
+/* Fertilizer */
+
+function showFertilizer(){
+
+let crop=document.getElementById("cropFertilizer").value;
+let result=document.getElementById("fertilizerResult");
+
+if(crop=="rice"){
+result.innerHTML="Recommended Fertilizer: Urea + DAP";
+}
+
+else if(crop=="wheat"){
+result.innerHTML="Recommended Fertilizer: NPK (20:20:20)";
+}
+
+else if(crop=="maize"){
+result.innerHTML="Recommended Fertilizer: Urea + Potash";
+}
+
+else if(crop=="tomato"){
+result.innerHTML="Recommended Fertilizer: Organic Compost + NPK";
+}
+
+}
+
+
+/* Market */
+
+function showMarket(){
+
+let crop=document.getElementById("cropMarket").value;
+let result=document.getElementById("marketResult");
+
+if(crop=="rice"){
+result.innerHTML="Current Price: ₹2100/quintal <br> Predicted Price: ₹2300/quintal";
+}
+
+else if(crop=="wheat"){
+result.innerHTML="Current Price: ₹2200/quintal <br> Predicted Price: ₹2400/quintal";
+}
+
+else if(crop=="tomato"){
+result.innerHTML="Current Price: ₹18/kg <br> Predicted Price: ₹25/kg";
+}
+
+else if(crop=="potato"){
+result.innerHTML="Current Price: ₹20/kg <br> Predicted Price: ₹24/kg";
+}
+
+}
+
+
+/* Weather */
+
+function showWeather(){
+
+let place=document.getElementById("locationWeather").value;
+let result=document.getElementById("weatherResult");
+
+if(place=="chennai"){
+result.innerHTML="Temperature: 32°C <br> Rainfall: Light Rain <br> Advice: Good for rice irrigation";
+}
+
+else if(place=="coimbatore"){
+result.innerHTML="Temperature: 30°C <br> Weather: Sunny <br> Advice: Suitable for harvesting";
+}
+
+else if(place=="madurai"){
+result.innerHTML="Temperature: 34°C <br> Weather: Dry <br> Advice: Use drip irrigation";
+}
+
+else if(place=="salem"){
+result.innerHTML="Temperature: 31°C <br> Weather: Cloudy <br> Advice: Monitor fungal diseases";
+}
+
+}
+
+</script>
+
+</body>
+</html>

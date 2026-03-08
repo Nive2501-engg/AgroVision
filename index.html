@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | AgroVision</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.auth-container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+background:#f5f7f6;
+}
+
+.auth-box{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+width:350px;
+text-align:center;
+}
+
+.auth-box h2{
+margin-bottom:20px;
+color:#1b5e20;
+}
+
+.auth-box input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.auth-box button{
+width:100%;
+padding:12px;
+border:none;
+background:#4caf50;
+color:white;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.auth-box a{
+display:block;
+margin-top:15px;
+color:#1b5e20;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo"><h2>🌱 AgroVision</h2></div>
+</header>
+
+<div class="auth-container">
+<div class="auth-box">
+<h2>Login</h2>
+
+<p id="logoutMessage" class="message"></p>
+
+<form id="loginForm">
+<input type="email" placeholder="Email" required>
+<input type="password" placeholder="Password" required>
+
+<button type="submit">Login</button>
+</form>
+
+<a href="register.html">Don't have an account? Register</a>
+
+</div>
+</div>
+
+<script>
+
+
+/* Show logout message */
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if(urlParams.get("logout") === "true"){
+document.getElementById("logoutMessage").textContent =
+"⚠ Please login to continue.";
+}
+
+/* Login redirect */
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+e.preventDefault();
+window.location.href="home.html";
+});
+
+
+</script>
+
+</body>
+</html>

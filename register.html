@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register | AgroVision</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.auth-container{
+display:flex;
+justify-content:center;
+align-items:center;
+height:80vh;
+background:#f5f7f6;
+}
+
+.auth-box{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+width:350px;
+text-align:center;
+}
+
+.auth-box h2{
+margin-bottom:20px;
+color:#1b5e20;
+}
+
+.auth-box input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.auth-box button{
+width:100%;
+padding:12px;
+border:none;
+background:#4caf50;
+color:white;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.success{
+margin-top:15px;
+color:green;
+display:none;
+}
+
+.login-btn{
+display:none;
+margin-top:15px;
+background:#1b5e20;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo"><h2>🌱 AgroVision</h2></div>
+</header>
+
+<div class="auth-container">
+<div class="auth-box">
+
+<h2>Register</h2>
+
+<form id="registerForm">
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email" required>
+<input type="password" placeholder="Password" required>
+<input type="password" placeholder="Confirm Password" required>
+
+<button type="submit">Register</button>
+</form>
+
+<p class="success" id="successMsg">Registered Successfully!</p>
+
+<button class="login-btn" id="loginBtn" onclick="location.href='index.html'">
+Back to Login
+</button>
+
+</div>
+</div>
+
+<script>
+
+document.getElementById("registerForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+document.getElementById("successMsg").style.display="block";
+
+document.getElementById("loginBtn").style.display="block";
+
+});
+
+</script>
+
+</body>
+</html>
