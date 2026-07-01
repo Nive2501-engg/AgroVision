@@ -1,12 +1,26 @@
-Smart Agro Assist:
+# AgroVision 🌾
 
-Project Overview:
-Smart Agro Assist is a web-based smart agriculture advisory system designed to help farmers make better decisions about crop management.
-The system provides crop suggestions and basic agricultural guidance using simple data inputs.
-This project aims to support farmers by providing accessible digital tools for improving productivity and crop planning.
+AgroVision is an agriculture guidance platform that helps farmers make better decisions using AI.
 
-Features:
-Market Price Detection
-Weather Prediction
-Fertilizer Recommendation
-Crop Disease Detection
+## What it does
+- Detects plant diseases from crop images
+- Suggests suitable fertilizers
+- Predicts market prices for crops
+- Analyzes weather conditions relevant to farming
+
+## Why I built it
+Farmers often lack quick access to reliable guidance on crop health, pricing, and weather. AgroVision brings these together in one place to support better, faster decisions.
+
+## Tech Stack
+- Java
+- MySQL
+- HTML, CSS
+
+## Features
+- Plant disease detection
+- Fertilizer recommendation
+- Market price prediction
+- Weather analysis
+
+## Author
+Nivetha S
